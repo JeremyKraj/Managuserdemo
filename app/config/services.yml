@@ -1,0 +1,31 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    wm_user.registration_listener:
+        class : WM\UserBundle\EventListener\RegistrationListener
+        arguments:  []
+        tags:
+            -  { name: kernel.event_subscriber}
+
+    app.form.registration:
+        class: WM\UserBundle\Form\Type\RegistrationUserOneFormType
+        tags:
+            - { name: "form.type", alias: "app_user_registration" }
+
+    app.form.invitation:
+        class: WM\UserBundle\Form\Type\InvitationFormType
+        arguments: ['@app.form.data_transformer.invitation']
+        tags:
+            - { name: "form.type", alias: "app_invitation_type" }
+
+    app.form.data_transformer.invitation:
+        class: WM\UserBundle\Form\DataTransformer\InvitationToCodeTransformer
+        arguments: ['@doctrine.orm.entity_manager']
+        public: false
+

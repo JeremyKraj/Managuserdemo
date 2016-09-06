@@ -1,0 +1,79 @@
+<?php
+
+namespace WM\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="user_one")
+ * @UniqueEntity(fields = "username", targetClass = "WM\UserBundle\Entity\User", message="fos_user.username.already_used")
+ * @UniqueEntity(fields = "email", targetClass = "WM\UserBundle\Entity\User", message="fos_user.email.already_used")
+ */
+class UserOne extends User
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    //Ici nous allons faire en sorte qu'on puisse inviter des User_One par le biais de la fonctionnalité correspondante à FOSUserBundle pour les invitations.
+
+    /**
+     * @ORM\OneToOne(targetEntity="Invitation")
+     * @ORM\JoinColumn(referencedColumnName="code")
+     * @Assert\NotNull(message="Your invitation is wrong", groups={"Registration"})
+     */
+    protected $invitation;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $phone;
+
+    public function __construct()
+    {
+       parent::__construct();
+//
+//        $this->roles = array('ROLE_USERONE');
+    }
+
+
+//    public function setInvitation(Invitation $invitation){
+//        $this->invitation=$invitation;
+//    }
+//
+//    public function getInvitation()
+//    {
+//        return $this->invitation
+//    }
+
+    /**
+     * Set phone
+     *
+     * @param integer $phone
+     *
+     * @return UserOne
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return integer
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+}

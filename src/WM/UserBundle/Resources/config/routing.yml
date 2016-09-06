@@ -1,0 +1,19 @@
+wm_user_homepage:
+    path:     /
+    defaults: { _controller: WMUserBundle:Default:index }
+
+user_one_registration:
+    path:  /register/user-one
+    defaults: { _controller: WMUserBundle:RegistrationUserOne:register }
+
+user_two_registration:
+    path:  /register/user-two
+    defaults: { _controller: WMUserBundle:RegistrationUserTwo:register }
+
+user_one_profile:
+   path:   /profile/one
+   defaults:  { _controller: WMUserBundle:ProfileUserOne:profile }
+
+user_two_profile:
+   path:   /profile/two
+   defaults:  { _controller: WMUserBundle:ProfileUserTwo:profile }

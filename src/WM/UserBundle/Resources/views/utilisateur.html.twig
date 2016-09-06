@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<h2>Page utilisateur</h2>
+
+    <p> Vous êtes connecté en tant que :
+    {% if is_granted('ROLE_USERONE') %}
+        <b>user one</b>
+    {% endif %}
+    {% if is_granted('ROLE_USERTWO') %}
+        <b>user two</b>
+    {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <b>user admin</b>
+    {% endif %}
+    </p>
+
+{% endblock %}

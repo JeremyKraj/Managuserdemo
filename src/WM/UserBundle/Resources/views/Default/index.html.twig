@@ -1,0 +1,54 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    {% include "WMUserBundle::utilisateur.html.twig" %}
+
+<h1>Page d'accueil</h1>
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <p><a href="{{  path('fos_user_security_logout') }}">Se déconnecter</a> </p>
+    {% else %}
+        <ul>
+    <li><a href="{{  path('fos_user_security_login') }}">Se connecter</a>
+    <li><a href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié</a></li>
+        </ul>
+<ul>
+        <li><a href="{{  path('user_one_registration') }}">Inscription user_one</a></li>
+        <li><a href="{{  path('user_two_registration') }}">Inscription user_two</a></li>
+    </ul>
+
+
+
+{% endif%}
+
+    {{ dump(app.user) }}
+
+    {% if is_granted('ROLE_USERONE') %}
+        <ul class="nav">
+            <li><a href="{{ path('user_one_profile') }}">Editer profil</a></li>
+        </ul>
+    {% elseif is_granted('ROLE_USERTWO') %}
+        <ul class="nav">
+            <li><a href="{{ path('user_two_profile') }}">Editer profil</a></li>
+        </ul>
+
+    {% endif %}
+
+
+
+    {#<p> Vos informations </p>#}
+    {#<ul>#}
+        {#<li>phone : {{ app.user.phone }}</li>#}
+        {#<li>email : {{ app.user.email }}</li>#}
+        {#<li>#}
+            {#Rôles :#}
+            {#<ul>#}
+                {#{% for role in app.user.roles %}#}
+                    {#<li> {{ role }}</li>#}
+                {#{% endfor %}#}
+            {#</ul>#}
+        {#</li>#}
+    {#</ul>#}
+
+{% endblock %}

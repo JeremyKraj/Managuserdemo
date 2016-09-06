@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <p>Vous vous êtes correctement authentifié</p>
+
+    <p>Bonjour</p>
+
+    <p><a href"{{ path('user_one_homepage') }}">Accéder à l'espace user_one</a></p>
+    <p><a href"{{ path('user_two_homepage') }}">Accéder à l'espace user_two</a></p>
+
+{% endblock %}
